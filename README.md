@@ -15,7 +15,7 @@ While reading that book I thought that yes, many principles are well known, but 
 Which is the easiest way to install it?
 =======================================
 
-Download the standalone jar from the releases directory. 
+Download the standalone jar from the [releases page](https://github.com/ftomassetti/effectivejava/releases). 
 No deps needed, everything is packed inside the jar.
 Feel free to rename it (effectivejava-0.1.0-SNAPSHOT-standalone.jar is a mouthful...)
 
@@ -43,7 +43,7 @@ CLI mode: how to use it
 
 Now, suppose you want to know which classes has 5 or more constructor; you can run this command:
 ```bash
-java -jar effectivejava-0.1.1-SNAPSHOT-standalone.jar -q mc -d "<myJavaProjectDir>" -t 5
+java -jar effectivejava-0.1.3-SNAPSHOT-standalone.jar -q mc -d "<myJavaProjectDir>" -t 5
 ```
 You can expect a similar output:
 ```
@@ -60,7 +60,7 @@ Interactive mode: how to use it (Work in progress!)
 You can launch interactive mode with the -i option.
 
 ```bash
-java -jar effectivejava-0.1.1-SNAPSHOT-standalone.jar -i
+java -jar effectivejava-0.1.3-SNAPSHOT-standalone.jar -i
 ```
 
 A typical interaction could be this one:
@@ -85,6 +85,24 @@ I am just getting started so I implemented only a few queries for now:
 * _st=singleton type_: find if a type implements the singleton pattern and distinguish between the three types (public field, static factory, singleton enum)
 * _u=utils classes_: find classes having only static methods and verify they have exactly one private constructor taking no parameters
 
+Effective Java (the book) items implemented
+===========================================
+
+| Item   | Status  |
+| ------  |---------|
+| Item 1  | Done |
+| item 2  | TODO |
+| item 3  | Done |
+| item 4  | Done |
+| item 5  | TODO |
+| item 6  | TODO |
+| item 7  | Done |
+| item 8  | Planned for v0.2 |
+| item 9  | Planned for v0.2 |
+| item 10  | Done | 
+| item 11  | TODO |
+| ...item 78 | TODO |
+
 Dev info
 ========
 The project is written in Clojure using a java library called [JavaParser](https://github.com/javaparser/javaparser).
@@ -94,13 +112,23 @@ You will need also [Leiningen](http://leiningen.org/), the build tool for Clojur
 Dev guidelines
 ==============
 
-Use [kibit](https://github.com/jonase/kibit) and [eastwood](https://github.com/jonase/eastwood) to verify code quality. You may want to add the to the plugins section of your `~/.lein/profiles.clj`.
+To monitor code quality we use [kibit](https://github.com/jonase/kibit) and [eastwood](https://github.com/jonase/eastwood).
 
 When running eastwood exclude the check for unlimited use of namespaces:
 
 ```
 lein eastwood "{:exclude-linters [:unlimited-use]}"
 ```
+
+To verify the code is correctly formatted [cljfmt](https://github.com/weavejester/cljfmt) is used. You can run it like this:
+```
+# to verify possible style issues
+lein cljfmt check
+# to automatically fix them
+lein cljfmt fix
+```
+
+We use [lein-ancient](https://github.com/xsc/lein-ancient) to verify our dependencies are up-to-date.
 
 What is the link with the book?
 ===============================
@@ -116,4 +144,4 @@ Hope you enjoy this small project of mine. Feel free to open issues and ask ques
 Contributors
 ============
 
-Thanks to [David Ortiz](https://github.com/davidor) for fixing bugs and setting up Travis.
+[David Ortiz](https://github.com/davidor) is a regular contributor: he started fixing bugs, setting up Travis and it is contributing many other improvements.
